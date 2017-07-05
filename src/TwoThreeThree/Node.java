@@ -21,6 +21,10 @@ public class Node<T extends Comparable> {
 
     }
 
+    /*
+    2节点
+     */
+
     public static <T extends Comparable> Node<T> newTwoNode(T value)
     {
         Node <T> node = new Node<T>();
@@ -28,6 +32,10 @@ public class Node<T extends Comparable> {
         node.twoNode = true;
         return node;
     }
+
+    /*
+    3节点
+     */
 
     public static <T extends Comparable> Node<T> newThreeNode(T leftVal , T rightVal)
     {
@@ -44,6 +52,10 @@ public class Node<T extends Comparable> {
         return node;
     }
 
+    /*
+    空节点
+     */
+
     public static HoleNode newHole()
     {
         return new HoleNode();
@@ -56,6 +68,9 @@ public class Node<T extends Comparable> {
             leftChild.setParent(this);
     }
 
+    /*
+    将两个子节点置空
+     */
     public void removeChildren(){
         this.leftChild = null;
         this.rightChild = null;
@@ -86,6 +101,10 @@ public class Node<T extends Comparable> {
     {
         this.parent = parent;
     }
+
+    /*
+    判断节点是否两个子节点都存在
+     */
 
     public boolean isTerminal(){
         return leftChild == null && rightChild == null;
@@ -145,6 +164,10 @@ public class Node<T extends Comparable> {
         return middleChild;
     }
 
+    /*
+    新节点代替老节点
+     */
+
     @SuppressWarnings("unchecked")
     public void replaceChild(Node currentChild, Node newChild) {
         if (currentChild == leftChild) {
@@ -155,8 +178,8 @@ public class Node<T extends Comparable> {
             assert  middleChild == currentChild;
             middleChild = newChild;
         }
-        newChild.setParent(this);
-        currentChild.setParent(null);
+        newChild.setParent(this);//将替代节点的父节点设置为原来节点的父节点
+        currentChild.setParent(null);//被替代的父节点设置为空
     }
 
 }

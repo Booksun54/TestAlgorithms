@@ -2,6 +2,7 @@ package TwoThreeThree;
 
 /**
  * Created by snake on 2017/6/29.
+ * 空结点
  */
 final class HoleNode <T extends  Comparable> extends Node {
 
@@ -15,6 +16,7 @@ final class HoleNode <T extends  Comparable> extends Node {
         return false;
     }
 
+    //选择兄弟结点
     public Node sibling(){
         if(parent()!=null)
         {

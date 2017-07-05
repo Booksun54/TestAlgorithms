@@ -29,58 +29,41 @@ public class TwoTreeTree<T extends Comparable> extends AbstractSet<T> implements
     }
 
 
-    public boolean contains(T value) {
-        return findNode(root, value) != null;
-    }
 
+    /*
+    DuplicateException当传递一个带有isUnique的操作参数设置为true 引发的异常包含多个重复的值
 
-    private Node<T> findNode(Node<T> node, T value) {
-        if (node == null) return null;
-
-        if (node.isThreeNode()) {
-            int leftComp = value.compareTo(node.leftVal());
-            int rightComp = value.compareTo(node.rightVal());
-            if (leftComp == 0 || rightComp == 0) {
-                return node;
-            }
-            if (leftComp < 0) {
-                return findNode(node.leftChild(), value);
-            } else if (rightComp < 0) {
-                return findNode(node.middleChild(), value);
-            } else {
-                return findNode(node.rightChild(), value);
-            }
-        } else {
-            int comp = value.compareTo(node.val());
-            if (comp == 0)
-                return node;
-            if (comp < 0)
-                return findNode(node.leftChild(), value);
-            else
-                return findNode(node.rightChild(), value);
-        }
-    }
-
-
-    private static final class DuplicateException extends RuntimeException {};
-    private static final DuplicateException DUPLICATE = new DuplicateException();
-
+    若向2节点插入 将2节点换成3节点
+    若向三节点中插入新键 将三节点变成4节点 然后分解成 2-3树
+    若向一个父节点为2节点的3节点插入新键 则将二结点变成三节点
+    若向一个父节点为3节点的3节点中插入新键 则同上进行变换
+    分解根节点 将树加高一层 
+     */
 
     private Node<T> insert(T value, Node<T> node) throws DuplicateException {
         Node<T> returnValue = null;
+
+        //判断是否是2节点 若是2节点 将2节点替换为3节点
         if (node.isTwoNode()) {
             int comp = value.compareTo(node.val());
 
             if (node.isTerminal()) {
                 if (comp == 0)
-                    throw DUPLICATE;
+                    throw DUPLICATE;//重复值报错
+
                 Node<T> thnode = Node.newThreeNode(value, node.val());
                 Node<T> parent = node.parent();
+
+                //判断是否是根节点 若是 则 替代子节点
                 if (parent != null)
-                    parent.replaceChild(node, thnode);
+                    parent.replaceChild(node, thnode);//通过父节点 将2节点 替代为3节点
                 else
                     root = thnode;
-            } else {
+            }
+            //两个子节点中至少有一个有值
+            else {
+                    //若不是四节点则直接插入此节点
+                    //2节点变3节点
                 if (comp < 0) {
                     Node<T> result = insert(value, node.leftChild());
                     if (result != null) {
@@ -88,13 +71,15 @@ public class TwoTreeTree<T extends Comparable> extends AbstractSet<T> implements
                         threeNode.setRightChild(node.rightChild());
                         threeNode.setMiddleChild(result.rightChild());
                         threeNode.setLeftChild(result.leftChild());
+                        //从父节点将2节点替换成3节点
                         if (node.parent() != null) {
                             node.parent().replaceChild(node, threeNode);
                         } else {
                             root = threeNode;
                         }
-                        unlinkNode(node);
+                        unlinkNode(node);//将被替代的节点子节点置空 父节点置空
                     }
+
                 } else if (comp > 0) {
                     Node<T> result = insert(value, node.rightChild());
                     if (result != null) {
@@ -110,7 +95,7 @@ public class TwoTreeTree<T extends Comparable> extends AbstractSet<T> implements
                         unlinkNode(node);
                     }
                 } else {
-                    throw DUPLICATE;
+                    throw DUPLICATE;//重复值
                 }
             }
 
@@ -123,10 +108,11 @@ public class TwoTreeTree<T extends Comparable> extends AbstractSet<T> implements
                 throw DUPLICATE;
             }
 
+            //判断是否有子节点
+
             if (threeNode.isTerminal()) {
 
-                returnValue = splitNode(threeNode, value);
-
+                returnValue = splitNode(threeNode, value);//返回三节点 形成四节点 分裂（2个节点变成3个 分裂成为上下 三脚形）
             } else {
                 if (leftComp < 0) {
                     Node<T> result = insert(value, threeNode.leftChild());
@@ -164,7 +150,75 @@ public class TwoTreeTree<T extends Comparable> extends AbstractSet<T> implements
         return returnValue;
     }
 
+    //将2节点转变成为三节点 三节点分裂
+    private Node<T> splitNode(Node<T> threeNode, T value) {
+        T min;
+        T max;
+        T middle;
+        if (value.compareTo(threeNode.leftVal()) < 0) {
+            min = value;
+            middle = threeNode.leftVal();
+            max = threeNode.rightVal();
+        } else if (value.compareTo(threeNode.rightVal()) < 0) {
+            min = threeNode.leftVal();
+            middle = value;
+            max = threeNode.rightVal();
+        } else {
+            min = threeNode.leftVal();
+            max = value;
+            middle = threeNode.rightVal();
+        }
 
+        Node<T> parent = Node.newTwoNode(middle);
+        parent.setLeftChild(Node.newTwoNode(min));
+        parent.setRightChild(Node.newTwoNode(max));
+        return parent;
+    }
+
+    //将子节点置空
+    private void unlinkNode(Node node) {
+        node.removeChildren();
+        node.setParent(null);
+    }
+
+    //判断234树是否包含节点
+    public boolean contains(T value) {
+        return findNode(root, value) != null;
+    }
+
+    //递归寻找结点
+    private Node<T> findNode(Node<T> node, T value) {
+        if (node == null) return null;
+
+        if (node.isThreeNode()) {
+            int leftComp = value.compareTo(node.leftVal());
+            int rightComp = value.compareTo(node.rightVal());
+            if (leftComp == 0 || rightComp == 0) {
+                return node;
+            }
+            if (leftComp < 0) {
+                return findNode(node.leftChild(), value);
+            } else if (rightComp < 0) {
+                return findNode(node.middleChild(), value);
+            } else {
+                return findNode(node.rightChild(), value);
+            }
+        } else {
+            int comp = value.compareTo(node.val());
+            if (comp == 0)
+                return node;
+            if (comp < 0)
+                return findNode(node.leftChild(), value);
+            else
+                return findNode(node.rightChild(), value);
+        }
+    }
+
+
+
+
+    private static final class DuplicateException extends RuntimeException {};
+    private static final DuplicateException DUPLICATE = new DuplicateException();
 
     public boolean remove(T value) {
         if (value == null)
@@ -177,11 +231,15 @@ public class TwoTreeTree<T extends Comparable> extends AbstractSet<T> implements
         HoleNode hole = null;
         Node<T> terminalNode;
         T holeValue;
+        //如果是叶子节点 则删除该节点
         if (node.isTerminal()) {
             terminalNode = node;
             holeValue = value;
+
         } else {
-            // Replace by successor.
+            // Replace by successor. 被后继节点代替 用后继的key覆盖 然后删除后继key
+
+            //不是二结点 父节点的key下移到该节点 兄弟节点中的一个key上移
             if (node.isThreeNode()) {
                 if (node.leftVal().equals(value)) {
                     Node<T> pred = predecessor(node, value);
@@ -194,6 +252,8 @@ public class TwoTreeTree<T extends Comparable> extends AbstractSet<T> implements
                     node.setRightVal(holeValue);
                     terminalNode = succ;
                 }
+
+                //是二结点
             } else {
                 Node<T> succ = successor(node, value);
                 holeValue = succ.isThreeNode() ? succ.leftVal() : succ.val();
@@ -466,10 +526,7 @@ public class TwoTreeTree<T extends Comparable> extends AbstractSet<T> implements
     }
 
 
-    private void unlinkNode(Node node) {
-        node.removeChildren();
-        node.setParent(null);
-    }
+
 
 
     private Node<T> successor(Node<T> node, T value) {
@@ -523,29 +580,6 @@ public class TwoTreeTree<T extends Comparable> extends AbstractSet<T> implements
     }
 
 
-    private Node<T> splitNode(Node<T> threeNode, T value) {
-        T min;
-        T max;
-        T middle;
-        if (value.compareTo(threeNode.leftVal()) < 0) {
-            min = value;
-            middle = threeNode.leftVal();
-            max = threeNode.rightVal();
-        } else if (value.compareTo(threeNode.rightVal()) < 0) {
-            min = threeNode.leftVal();
-            middle = value;
-            max = threeNode.rightVal();
-        } else {
-            min = threeNode.leftVal();
-            max = value;
-            middle = threeNode.rightVal();
-        }
-
-        Node<T> parent = Node.newTwoNode(middle);
-        parent.setLeftChild(Node.newTwoNode(min));
-        parent.setRightChild(Node.newTwoNode(max));
-        return parent;
-    }
 
 
     public interface Function<T> {
@@ -560,6 +594,7 @@ public class TwoTreeTree<T extends Comparable> extends AbstractSet<T> implements
      * Visit the middle subtree
 
      */
+
     public void preOrder(Node<T> node, Function<T> f) {
         if (node.isThreeNode()) {
             f.apply(node.leftVal());

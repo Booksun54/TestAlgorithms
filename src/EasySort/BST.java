@@ -40,6 +40,8 @@ public class BST<Key extends Comparable<Key> , Value> {
         return get(root , key);
     }
 
+
+    //递归查找节点
     private Value get(Node x , Key key)
     {
         if(x==null) return null;
@@ -57,7 +59,7 @@ public class BST<Key extends Comparable<Key> , Value> {
 
     private Node put(Node x , Key key , Value val)
     {
-        if(x==null) return new Node(key,val,1);
+        if(x==null) return new Node(key,val,1);//如果为null 则为头结点
         int cmp = key.compareTo(x.key);
         if(cmp<0) x.left = put(x.left,key,val);
         else if(cmp>0)x.right = put(x.right,key,val);
@@ -69,6 +71,7 @@ public class BST<Key extends Comparable<Key> , Value> {
     /*
     二叉树最小值
      */
+
     public Key min()
     {return min(root).key;}
 
@@ -79,7 +82,7 @@ public class BST<Key extends Comparable<Key> , Value> {
     }
 
     /*
-    二叉树最大值
+    二叉树最大值 递归
      */
 
     public Key max()
@@ -172,6 +175,8 @@ public class BST<Key extends Comparable<Key> , Value> {
 
     /*
     删除最大键和删除最小键
+
+    如果左链接非空 那么 树中最小的键就是左子树的键
      */
 
     public void deleteMin()
