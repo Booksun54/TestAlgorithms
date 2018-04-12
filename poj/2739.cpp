@@ -49,7 +49,7 @@ void GetPrimes(int n)
     {
         if(!is_prime[i])//删除倍数后若不存在则跳过
             continue;
-        primes[k++] = i;
+        primes[k++] = i;//将素数放入数组中
 
         for(int m = 1; m*i <= n;m++)
         {

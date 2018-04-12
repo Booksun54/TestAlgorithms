@@ -14,8 +14,8 @@ int main()
     cin>>input;
      for(int i = 0; i < input.length();i++)
         b[input[i]-'A']++;
-    sort(a,a+26);
-    sort(b,b+26);
+    sort(a,a+26);//按照升序排序
+    sort(b,b+26);//按照升序排序
     int i;
     for(i = 0; i<26;i++)
     {
