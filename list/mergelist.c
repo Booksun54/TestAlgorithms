@@ -19,7 +19,7 @@ int main()
     {
         if (InsertList(&A, i, &a[i - 1]) == 0)
         {
-            printf("浣嶇疆涓嶅悎娉?!");
+            printf("位置不合法!");
             return -1;
         }
     }
@@ -28,21 +28,22 @@ int main()
     {
         if (InsertList(&B, i, &b[i - 1]) == 0)
         {
-            printf("浣嶇疆涓嶅悎娉?!");
+            printf("位置不合法!");
             return -1;
         }
     }
 
-    printf("椤哄簭琛ㄤ腑A鐨勫厓绱?:\n");
+    printf("顺序表中A的元素:\n");
     for (i = 1; i <= A.length; i++)
     {
+    
         flag = GetElem(A, i, &e);
         if (flag == 1)
             printf("%4d", e);
     }
     printf("\n");
-    printf("椤哄簭琛ㄤ腑B鐨勫厓绱?:\n");
-    for (i = 1; i <= A.length; i++)
+    printf("顺序表中B的元素:\n");
+    for (i = 1; i <= B.length; i++)
     {
         flag = GetElem(B, i, &e);
         if (flag == 1)
@@ -50,9 +51,9 @@ int main()
     }
     printf("\n");
 
-    printf("灏咥鍜孊涓殑鍏冪礌鍚堝苟鍒癈锛歕n");
+    printf("合并得到C中元素\n");
     MergeList(A, B, &C);
-    for (i = 1; i <= A.length; i++)
+    for (i = 1; i <= C.length; i++)
     {
         flag = GetElem(C, i, &e);
         if (flag == 1)
@@ -71,23 +72,26 @@ void MergeList(SeqList A, SeqList B, SeqList *C)
     k = 1;
     while (i < A.length && j < B.length)
     {
+
         GetElem(A, i, &e1);
-        GetElem(B, i, &e2);
-        if (e1 < e2)
+        GetElem(B, j, &e2);
+        if (e1 <= e2)
         {
+            printf("abc");
             InsertList(C, k, &e1);
             i++;
             k++;
         }
         else
         {
+           
             InsertList(C, k, &e2);
             j++;
             k++;
         }
     }
 
-    while (i < A.length)
+    while (i <= A.length)
     {
         GetElem(A, i, &e1);
         InsertList(C, k, &e1);
@@ -95,7 +99,7 @@ void MergeList(SeqList A, SeqList B, SeqList *C)
         k++;
     }
 
-    while (j < B.length)
+    while (j <= B.length)
     {
         GetElem(B, i, &e2);
         InsertList(C, k, &e2);

@@ -52,7 +52,7 @@ int InsertList(SeqList *L,int i , DataType *e)
          {
             L->list[j]=L->list[j-1];
          }
-         L->list[i] = *e;
+         L->list[i-1] = *e;
          L->length++;
          return 1;
      }
