@@ -77,7 +77,6 @@ void MergeList(SeqList A, SeqList B, SeqList *C)
         GetElem(B, j, &e2);
         if (e1 <= e2)
         {
-            printf("abc");
             InsertList(C, k, &e1);
             i++;
             k++;
