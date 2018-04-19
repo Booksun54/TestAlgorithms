@@ -32,6 +32,19 @@ int GetElem(SeqList L, int i, DataType *e)
     return 1;
 }
 
+int LocateElem(SeqList L,DataType e)
+{
+    int i;
+    for(i=0;i<L.length;i++)
+    {
+        if(L.list[i]==e)
+        {
+            return i+1;
+        }
+    }
+    return 0;
+}
+
 int InsertList(SeqList *L,int i , DataType *e)
 {
     int j;
