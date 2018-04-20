@@ -93,7 +93,7 @@ int DeleteList(SeqList *L , int i , DataType *e)
             L->list[j-1]=L->list[j];
         }
         L->length--;
-        return -1;
+        return 1;
     }
 }
 

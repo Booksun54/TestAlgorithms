@@ -4,7 +4,7 @@ typedef int DataType;
 #include ".\head\SeqList.h"
 
 /*
-å°†LBä¸­ä¸åœ¨LAä¸­çš„å…ƒç´ æ’å…¥åˆ°LAä¸­
+½«LBÖĞ²»ÔÚLAÖĞµÄÔªËØ²åÈëµ½LAÖĞ
 */
 void UnionAB(SeqList *LA,SeqList LB);
 
@@ -21,19 +21,19 @@ int main()
     {
         if(InsertList(&LA,i+1,&a[i])==0)
         {
-            printf("ä½ç½®ä¸åˆæ³•ï¼");
-            return ;
+            printf("Î»ÖÃ²»ºÏ·¨£¡");
+            return -1;
         }
     }
       for(i=0;i<sizeof(b)/sizeof(b[0]);i++)
     {
         if(InsertList(&LB,i+1,&b[i])==0)
         {
-            printf("ä½ç½®ä¸åˆæ³•ï¼");
-            return ;
+            printf("Î»ÖÃ²»ºÏ·¨£¡");
+            return -1;
         }
     }
-    printf("é¡ºåºè¡¨ä¸­LAä¸­çš„å…ƒç´ :\n");
+    printf("Ë³Ğò±íÖĞLAÖĞµÄÔªËØ:\n");
     for(i=1;i<LA.length;i++)
     {
         flag=GetElem(LA,i,&e);
@@ -44,7 +44,7 @@ int main()
     }
     printf("\n");
    
-     printf("é¡ºåºè¡¨ä¸­LBä¸­çš„å…ƒç´ :\n");
+     printf("Ë³Ğò±íÖĞLBÖĞµÄÔªËØ:\n");
      for(i=1;i<=LB.length;i++)
      {
           flag=GetElem(LB,i,&e);
@@ -55,7 +55,7 @@ int main()
      }
       printf("\n");
 
-      printf("å°†LBä¸­ä½†ä¸åœ¨LAä¸­çš„å…ƒç´ æ’å…¥åˆ°LAä¸­ï¼š\n");
+      printf("½«LBÖĞµ«²»ÔÚLAÖĞµÄÔªËØ²åÈëµ½LAÖĞ£º\n");
       UnionAB(&LA,LB);
 
        for(i=1;i<=LA.length;i++)

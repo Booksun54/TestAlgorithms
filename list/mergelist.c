@@ -3,6 +3,10 @@
 typedef int DataType;
 #include ".\head\SeqList.h"
 
+/*
+åˆå¹¶ä¸¤ä¸ªçº¿æ€§è¡¨ä¸­çš„å…ƒç´ 
+*/
+
 void MergeList(SeqList A, SeqList B, SeqList *C);
 
 int main()
@@ -19,7 +23,7 @@ int main()
     {
         if (InsertList(&A, i, &a[i - 1]) == 0)
         {
-            printf("Î»ÖÃ²»ºÏ·¨!");
+            printf("ä½ç½®ä¸åˆæ³•!");
             return -1;
         }
     }
@@ -28,12 +32,12 @@ int main()
     {
         if (InsertList(&B, i, &b[i - 1]) == 0)
         {
-            printf("Î»ÖÃ²»ºÏ·¨!");
+            printf("ä½ç½®ä¸åˆæ³•!");
             return -1;
         }
     }
 
-    printf("Ë³Ğò±íÖĞAµÄÔªËØ:\n");
+    printf("é¡ºåºè¡¨ä¸­Açš„å…ƒç´ :\n");
     for (i = 1; i <= A.length; i++)
     {
     
@@ -42,7 +46,7 @@ int main()
             printf("%4d", e);
     }
     printf("\n");
-    printf("Ë³Ğò±íÖĞBµÄÔªËØ:\n");
+    printf("é¡ºåºè¡¨ä¸­Bçš„å…ƒç´ :\n");
     for (i = 1; i <= B.length; i++)
     {
         flag = GetElem(B, i, &e);
@@ -51,7 +55,7 @@ int main()
     }
     printf("\n");
 
-    printf("ºÏ²¢µÃµ½CÖĞÔªËØ\n");
+    printf("åˆå¹¶å¾—åˆ°Cä¸­å…ƒç´ \n");
     MergeList(A, B, &C);
     for (i = 1; i <= C.length; i++)
     {
