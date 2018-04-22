@@ -1,5 +1,5 @@
 # TestAlgorithms
-  # 生活不只是有眼前的苟且，还有诗和远方
+
   # 顺序表
       head 头文件 SeqList.h
       定义数据结构
@@ -30,6 +30,10 @@
         判断给出的数字有多少种由素数相加得到的 埃式筛法+尺取法
       6. 3299
         华氏度运算 指数运算
+  # PAT 乙级题目
+      1001 3n+1 
+      1002 写出这个数
+      1003 我要通过 
 
   # 2018/3/23
   提交huffman AVL树代码
@@ -41,3 +45,4 @@
   基本上是算法第四版的算法 和 博客 里面的算法实现  
    http://blog.csdn.net/disappearedgod/article/details/24123563 234树的实现</br>
    http://www.cnblogs.com/nullzx/p/6111175.html 234树的原理介绍</br>
+  # 生活不只是有眼前的苟且，还有诗和远方
