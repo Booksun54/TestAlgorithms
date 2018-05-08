@@ -13,7 +13,7 @@ int input(sqlist A)
         A[i] = 0;
     }
 
-    printf("ÊäÈëÒ»¸öÕıÕûÊıµÄ¸÷Î»(ÊäÈë-1½áÊø)\n");
+    printf("è¾“å…¥ä¸€ä¸ªæ­£æ•´æ•°çš„å„ä½(è¾“å…¥-1ç»“æŸ)\n");
     i = 0;
     while(1)
     {
@@ -52,10 +52,10 @@ int add(sqlist *A , int na, sqlist B,int nb)
     else
         nc = nb;
 
-    move(*A,na);//½«Êı×ÖµÄ×îĞ¡Î»ÒÆµ½Êı×éµÄ×î´óÎ»
+    move(*A,na);//å°†æ•°å­—çš„æœ€å°ä½ç§»åˆ°æ•°ç»„çš„æœ€å¤§ä½
     move(B,nb);
 
-    //½øĞĞ¼Ó·¨ÔËËã
+    //è¿›è¡ŒåŠ æ³•è¿ç®—
     for(i=MaxLen-1;i>=MaxLen-nc;i--)
     {
         j=(*A)[i]+B[i];
@@ -67,9 +67,9 @@ int add(sqlist *A , int na, sqlist B,int nb)
             (*A)[i] = j;
         }
 
-        if(i==MaxLen-nc)//×î¸ßÎ»µÄÉÏÒ»Î»
+        if(i==MaxLen-nc)//æœ€é«˜ä½çš„ä¸Šä¸€ä½
         {
-            if(j>9)//×î¸ßÎ»½øÒ»Î» ³¤¶È¼ÓÒ»
+            if(j>9)//æœ€é«˜ä½è¿›ä¸€ä½ é•¿åº¦åŠ ä¸€
             {
                 (*A)[i-1] = 1;
                 length = nc+1;
@@ -87,12 +87,12 @@ int main()
     int na,nb,nc;
     na = input(A);
     nb = input(B);
-    printf("ÕûÊıA:");
+    printf("æ•´æ•°A:");
     output(A,0,na);
-    printf("ÕûÊıB:");
+    printf("æ•´æ•°B:");
     output(B,0,nb);
     nc = add(&A,na,B,nb);
-    printf("ÕûÊıC:");
+    printf("æ•´æ•°C:");
     output(A,MaxLen-nc,MaxLen);
     return 0 ;
 }
