@@ -1,0 +1,35 @@
+<html>
+<body>
+<pre>
+<h1>Build Log</h1>
+<h3>
+--------------------Configuration: 17_04 - Win32 Debug--------------------
+</h3>
+<h3>Command Lines</h3>
+Creating temporary file "C:\Users\ADMINI~1\AppData\Local\Temp\RSPC456.tmp" with contents
+[
+/nologo /MLd /W3 /Gm /GX /ZI /Od /D "WIN32" /D "_DEBUG" /D "_CONSOLE" /D "_MBCS" /Fp"Debug/17_04.pch" /YX /Fo"Debug/" /Fd"Debug/" /FD /GZ  /c 
+"D:\数据结构与算法大辞典\17_04\17-04.c"
+]
+Creating command line "cl.exe @C:\Users\ADMINI~1\AppData\Local\Temp\RSPC456.tmp" 
+Creating temporary file "C:\Users\ADMINI~1\AppData\Local\Temp\RSPC457.tmp" with contents
+[
+kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib  kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /nologo /subsystem:console /incremental:yes /pdb:"Debug/17_04.pdb" /debug /machine:I386 /out:"Debug/17_04.exe" /pdbtype:sept 
+".\Debug\17-04.obj"
+]
+Creating command line "link.exe @C:\Users\ADMINI~1\AppData\Local\Temp\RSPC457.tmp"
+<h3>Output Window</h3>
+Compiling...
+17-04.c
+D:\数据结构与算法大辞典\17_04\17-04.c(48) : warning C4244: '=' : conversion from 'int ' to 'float ', possible loss of data
+D:\数据结构与算法大辞典\17_04\17-04.c(103) : warning C4013: 'exit' undefined; assuming extern returning int
+D:\数据结构与算法大辞典\17_04\17-04.c(106) : warning C4715: 'ComputeExpress' : not all control paths return a value
+Linking...
+
+
+
+<h3>Results</h3>
+17_04.exe - 0 error(s), 3 warning(s)
+</pre>
+</body>
+</html>

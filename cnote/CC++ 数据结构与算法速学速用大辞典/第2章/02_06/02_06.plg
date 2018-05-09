@@ -1,0 +1,28 @@
+<html>
+<body>
+<pre>
+<h1>Build Log</h1>
+<h3>
+--------------------Configuration: 02_06 - Win32 Debug--------------------
+</h3>
+<h3>Command Lines</h3>
+Creating temporary file "C:\Users\ADMINI~1\AppData\Local\Temp\RSP4576.tmp" with contents
+[
+/nologo /MLd /W3 /Gm /GX /ZI /Od /D "WIN32" /D "_DEBUG" /D "_CONSOLE" /D "_MBCS" /FR"Debug/" /Fp"Debug/02_06.pch" /YX /Fo"Debug/" /Fd"Debug/" /FD /GZ /c 
+"D:\数据结构与算法大辞典\02_06\02_06.cpp"
+]
+Creating command line "cl.exe @C:\Users\ADMINI~1\AppData\Local\Temp\RSP4576.tmp" 
+<h3>Output Window</h3>
+Compiling...
+02_06.cpp
+d:\数据结构与算法大辞典\02_06\02_06.cpp(48) : warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
+d:\数据结构与算法大辞典\02_06\02_06.cpp(94) : warning C4806: '!=' : unsafe operation: no value of type 'bool' promoted to type 'const int' can equal the given constant
+d:\数据结构与算法大辞典\02_06\02_06.cpp(106) : warning C4715: 'ComputeExpress' : not all control paths return a value
+
+
+
+<h3>Results</h3>
+02_06.obj - 0 error(s), 3 warning(s)
+</pre>
+</body>
+</html>
